@@ -1073,3 +1073,5 @@ do                                                              \
 #define CONFIG_MIN_WIZLIST_LEV  config_info.autowiz.min_wizlist_lev
 
 #endif /* _UTILS_H_ */
+
+//void admin_set(struct char_data *ch, int value);
