@@ -510,7 +510,7 @@ void command_interpreter(struct char_data *ch, char *argument) {
     for (length = strlen(arg), cmd = 0; *complete_cmd_info[cmd].command != '\n'; cmd++)
         if (complete_cmd_info[cmd].command_pointer != do_action &&
                 !strncmp(complete_cmd_info[cmd].command, arg, length))
-            if (GET_LEVEL(ch) >= complete_cmd_info[cmd].minimum_level) &&
+            if (GET_LEVEL(ch) >= complete_cmd_info[cmd].minimum_level &&
                 GET_ADMLEVEL(ch) >= complete_cmd_info[cmd].minimum_admlevel)
                 break;
 
