@@ -173,7 +173,7 @@ void save_player_index(void) {
             sprintascii(bits, player_table[i].flags);
             fprintf(index_file, "%ld %s %d %s %ld %d\n", player_table[i].id,
                     player_table[i].name, player_table[i].level, *bits ? bits : "0",
-                    (long) player_table[i].last player_table[i].admlevel);
+                    (long) player_table[i].last, player_table[i].admlevel);
         }
     fprintf(index_file, "~\n");
 
