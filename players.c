@@ -740,12 +740,12 @@ void save_char(struct char_data * ch) {
         save_index = TRUE;
         player_table[id].level = GET_LEVEL(ch);
     }
-    
+
     if (player_table[id].admlevel != GET_ADMLEVEL(ch)) {
         save_index = TRUE;
         player_table[id].admlevel = GET_ADMLEVEL(ch);
     }
-    
+
     if (player_table[id].last != ch->player.time.logon) {
         save_index = TRUE;
         player_table[id].last = ch->player.time.logon;
