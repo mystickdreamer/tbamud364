@@ -960,7 +960,7 @@ const char *admin_level_names[ADMLVL_IMPL+2] = {
   "Admin",
   "Senior Admin",
   "Implementor",
-  "\n",
+  "\n"
 };
 
 /* Administrative flags */
