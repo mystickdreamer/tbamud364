@@ -662,7 +662,7 @@ static void spello(int spl, const char *name, int max_mana, int min_mana,
   int i;
 
   for (i = 0; i < NUM_CLASSES; i++)
-    spell_info[spl].min_level[i] = ADMLVL_IMMORT;
+    spell_info[spl].min_level[i] = CONFIG_LEVEL_CAP;
   spell_info[spl].mana_max = max_mana;
   spell_info[spl].mana_min = min_mana;
   spell_info[spl].mana_change = mana_change;
@@ -679,7 +679,7 @@ void unused_spell(int spl)
   int i;
 
   for (i = 0; i < NUM_CLASSES; i++)
-    spell_info[spl].min_level[i] = ADMLVL_IMPL + 1;
+    spell_info[spl].min_level[i] = CONFIG_LEVEL_CAP;
   spell_info[spl].mana_max = 0;
   spell_info[spl].mana_min = 0;
   spell_info[spl].mana_change = 0;
