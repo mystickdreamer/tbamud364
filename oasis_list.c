@@ -346,7 +346,7 @@ void print_zone(struct char_data *ch, zone_vnum vnum)
 {
   zone_rnum rnum;
   int size_rooms, size_objects, size_mobiles, size_quests, i;
-  int size_guilds, size_shops;
+  int size_guilds, size_shops, size_trigs;
   room_vnum top, bottom;
   int largest_table;
   
