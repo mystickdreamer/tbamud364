@@ -1654,7 +1654,7 @@ ACMD(do_where) {
     else
         perform_mortal_where(ch, arg);
 }
-/*
+
 ACMD(do_levels) {
     char buf[MAX_STRING_LENGTH], arg[MAX_STRING_LENGTH];
     size_t len = 0, nlen;
@@ -1670,17 +1670,17 @@ ACMD(do_levels) {
         if (isdigit(*arg)) {
             ret = sscanf(arg, "%d-%d", &min_lev, &max_lev);
             if (ret == 0) {
- */               /* No valid args found */
-/*                min_lev = 1;
+                /* No valid args found */
+                min_lev = 1;
                 max_lev = CONFIG_LEVEL_CAP;
             } else if (ret == 1) {
-*/                /* One arg = range is (num) either side of current level */
-/*                val = min_lev;
+                /* One arg = range is (num) either side of current level */
+                val = min_lev;
                 max_lev = MIN(GET_ADMLEVEL(ch) + val, ADMLVL_IMMORT);
                 min_lev = MAX(GET_LEVEL(ch) - val, 1);
             } else if (ret == 2) {
-*/                /* Two args = min-max range limit - just do sanity checks */
-/*                min_lev = MAX(min_lev, 1);
+                /* Two args = min-max range limit - just do sanity checks */
+                min_lev = MAX(min_lev, 1);
                 max_lev = MIN(max_lev + 1, ADMLVL_IMMORT);
             }
         } else {
@@ -1723,34 +1723,6 @@ ACMD(do_levels) {
     page_string(ch->desc, buf, TRUE);
 }
 */
-
-ACMD(do_levels)
-{
-  char buf[MAX_STRING_LENGTH];
-  size_t i, len = 0, nlen;
-
-  if (IS_NPC(ch)) {
-    send_to_char(ch, "You ain't nothin' but a hound-dog.\r\n");
-    return;
-  }
-
-  for (i = 2; i < CONFIG_LEVEL_CAP; i++) {
-    if (i == CONFIG_LEVEL_CAP - 1)
-      nlen = snprintf(buf + len, sizeof(buf) - len, "[%2d] %8d          : \r\n",
-           CONFIG_LEVEL_CAP - 1, level_exp(CONFIG_LEVEL_CAP - 1));
-    else
-    nlen = snprintf(buf+len, sizeof(buf)-len, "[%d] %d %d : \r\n", (int)i,
-		level_exp(i), level_exp(i) - 1);
-    if (len + nlen >= sizeof(buf) || nlen < 0)
-      break;
-    len += nlen;
-  }
-
-  page_string(ch->desc, buf, true);
-}
-
-
-
 ACMD(do_consider) {
     char buf[MAX_INPUT_LENGTH];
     struct char_data *victim;
