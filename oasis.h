@@ -1,14 +1,14 @@
 /**
-* @file oasis.h
-* Oasis online creation general defines.
-*
-* Part of the core tbaMUD source code distribution, which is a derivative
-* of, and continuation of, CircleMUD.
-*
-* This source code, which was not part of the CircleMUD legacy code,
-* is attributed to:
-* By Levork. Copyright 1996 by Harvey Gilpin, 1997-2001 by George Greer.
-*/
+ * @file oasis.h
+ * Oasis online creation general defines.
+ *
+ * Part of the core tbaMUD source code distribution, which is a derivative
+ * of, and continuation of, CircleMUD.
+ *
+ * This source code, which was not part of the CircleMUD legacy code,
+ * is attributed to:
+ * By Levork. Copyright 1996 by Harvey Gilpin, 1997-2001 by George Greer.
+ */
 #ifndef _OASIS_H_
 #define _OASIS_H_
 
@@ -81,33 +81,34 @@ void split_argument(char *argument, char *tag);
 void send_cannot_edit(struct char_data *ch, zone_vnum zone);
 
 /* OLC structures. */
+
 /* NO and YES are defined in utils.h. Removed from here. */
 
 struct oasis_olc_data {
-  int mode;                      /* how to parse input       */
-  zone_rnum zone_num;            /* current zone             */
-  room_vnum number;              /* vnum of subject          */
-  int value;                     /* mostly 'has changed' flag*/
-  char *storage;                 /* used for 'tedit'         */
-  struct char_data *mob;         /* used for 'medit'         */
-  struct room_data *room;        /* used for 'redit'         */
-  struct obj_data *obj;          /* used for 'oedit'         */
-  struct zone_data *zone;        /* used for 'zedit'         */
-  struct shop_data *shop;        /* used for 'sedit'         */
-  struct config_data *config;    /* used for 'cedit'         */
-  struct aq_data *quest;         /* used for 'qedit'         */
-  struct extra_descr_data *desc; /* used in '[r|o|m]edit'    */
-  struct social_messg *action;   /* Aedit uses this one      */
-  struct trig_data *trig;
-  struct prefs_data *prefs;      /* used for 'prefedit'      */
-  struct ibt_data *ibt;          /* used for 'ibtedit'       */
-  struct message_list *msg;
-  struct message_type *m_type;
-  int script_mode;
-  int trigger_position;
-  int item_type;
-  struct trig_proto_list *script; /* for assigning triggers in [r|o|m]edit*/
-  struct help_index_element*help;   /* Hedit uses this */
+    int mode; /* how to parse input       */
+    zone_rnum zone_num; /* current zone             */
+    room_vnum number; /* vnum of subject          */
+    int value; /* mostly 'has changed' flag*/
+    char *storage; /* used for 'tedit'         */
+    struct char_data *mob; /* used for 'medit'         */
+    struct room_data *room; /* used for 'redit'         */
+    struct obj_data *obj; /* used for 'oedit'         */
+    struct zone_data *zone; /* used for 'zedit'         */
+    struct shop_data *shop; /* used for 'sedit'         */
+    struct config_data *config; /* used for 'cedit'         */
+    struct aq_data *quest; /* used for 'qedit'         */
+    struct extra_descr_data *desc; /* used in '[r|o|m]edit'    */
+    struct social_messg *action; /* Aedit uses this one      */
+    struct trig_data *trig;
+    struct prefs_data *prefs; /* used for 'prefedit'      */
+    struct ibt_data *ibt; /* used for 'ibtedit'       */
+    struct message_list *msg;
+    struct message_type *m_type;
+    int script_mode;
+    int trigger_position;
+    int item_type;
+    struct trig_proto_list *script; /* for assigning triggers in [r|o|m]edit*/
+    struct help_index_element*help; /* Hedit uses this */
 };
 
 /* Exported globals. */
@@ -375,10 +376,11 @@ extern const char *nrm, *grn, *cyn, *yel;
 #define CEDIT_NAMESERVER_IS_SLOW	51
 #define CEDIT_USE_AUTOWIZ		52
 #define CEDIT_MIN_WIZLIST_LEV		53
-#define CEDIT_MAP_OPTION   54
-#define CEDIT_MAP_SIZE     55
-#define CEDIT_MINIMAP_SIZE   56
-#define CEDIT_DEBUG_MODE     57
+#define CEDIT_MAP_OPTION                54
+#define CEDIT_MAP_SIZE                  55
+#define CEDIT_MINIMAP_SIZE              56
+#define CEDIT_DEBUG_MODE                57
+#define CEDIT_LEVEL_CAP			58
 
 /* Hedit Submodes of connectedness. */
 #define HEDIT_CONFIRM_SAVESTRING        0
@@ -389,7 +391,7 @@ extern const char *nrm, *grn, *cyn, *yel;
 #define HEDIT_KEYWORDS                  5
 #define HEDIT_MIN_LEVEL                 6
 
-int  save_config( IDXTYPE nowhere );
+int save_config(IDXTYPE nowhere);
 
 /* Prototypes to keep. */
 void clear_screen(struct descriptor_data *);
@@ -431,7 +433,7 @@ void zedit_parse(struct descriptor_data *d, char *arg);
 ACMD(do_oasis_zedit);
 
 /* public functions from cedit.c */
-void cedit_save_to_disk( void );
+void cedit_save_to_disk(void);
 void cedit_parse(struct descriptor_data *d, char *arg);
 void cedit_string_cleanup(struct descriptor_data *d, int terminator);
 ACMD(do_oasis_cedit);
