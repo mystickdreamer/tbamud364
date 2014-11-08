@@ -1098,7 +1098,7 @@ ACMD(do_who) {
     int i, num_can_see = 0;
     char name_search[MAX_INPUT_LENGTH], buf[MAX_INPUT_LENGTH];
     char mode;
-    int low = 0, high = ADMLVL_IMPL, localwho = 0, questwho = 0;
+    int low = 0, high = CONFIG_LEVEL_CAP, localwho = 0, questwho = 0;
     int showclass = 0, short_list = 0, outlaws = 0;
     int who_room = 0, showgroup = 0, showleader = 0;
 
@@ -1341,7 +1341,7 @@ ACMD(do_users) {
     char name_search[MAX_INPUT_LENGTH], host_search[MAX_INPUT_LENGTH];
     struct char_data *tch;
     struct descriptor_data *d;
-    int low = 0, high = ADMLVL_IMPL, num_can_see = 0;
+    int low = 0, high = CONFIG_LEVEL_CAP, num_can_see = 0;
     int showclass = 0, outlaws = 0, playing = 0, deadweight = 0;
     char buf[MAX_INPUT_LENGTH], arg[MAX_INPUT_LENGTH];
 
@@ -1658,7 +1658,7 @@ ACMD(do_where) {
 ACMD(do_levels) {
     char buf[MAX_STRING_LENGTH], arg[MAX_STRING_LENGTH];
     size_t len = 0, nlen;
-    int i, ret, min_lev = 1, max_lev = ADMLVL_IMMORT, val;
+    int i, ret, min_lev = 1, max_lev = CONFIG_LEVEL_CAP, val;
 
     if (IS_NPC(ch)) {
         send_to_char(ch, "You ain't nothin' but a hound-dog.\r\n");
@@ -1672,7 +1672,7 @@ ACMD(do_levels) {
             if (ret == 0) {
                 /* No valid args found */
                 min_lev = 1;
-                max_lev = ADMLVL_IMMORT;
+                max_lev = CONFIG_LEVEL_CAP;
             } else if (ret == 1) {
                 /* One arg = range is (num) either side of current level */
                 val = min_lev;
