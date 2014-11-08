@@ -1327,6 +1327,7 @@ struct game_data {
     int map_size; /**< Default size for map command         */
     int minimap_size; /**< Default size for mini-map (automap)  */
     int script_players; /**< Is attaching scripts to players allowed? */
+    ubyte level_cap; /* You cannot level to this level       */
 
     char *OK; /**< When player receives 'Okay.' text.    */
     char *NOPERSON; /**< 'No one by that name here.'   */
@@ -1385,6 +1386,7 @@ struct autowiz_data {
 };
 /*******************  Config macros *********************/
 #define CONFIG_LEVEL_CAP	config_info.play.level_cap
+
 /**
  Main Game Configuration Structure.
  Global variables that can be changed within the game are held within this
