@@ -2809,7 +2809,7 @@ static int perform_set(struct char_data *ch, struct char_data *vict, int mode, c
 
     /* Check to make sure all the levels are correct */
     if (GET_ADMLEVEL(ch) != ADMLVL_IMPL) {
-        if (!IS_NPC(vict) && GET_LEVEL(ch) <= GET_LEVEL(vict) && vict != ch) {
+        if (!IS_NPC(vict) && GET_LEVEL(ch) < GET_LEVEL(vict) && vict != ch) {
             send_to_char(ch, "Maybe that's not such a great idea...\r\n");
             return (0);
         }
