@@ -260,9 +260,10 @@ void list_objects(struct char_data *ch, zone_rnum rnum, room_vnum vmin, room_vnu
     if (obj_index[i].vnum >= bottom && obj_index[i].vnum <= top) {
       counter++;
       
-      send_to_char(ch, "@g%4d@n) [@g%-5d@n] @c%-44.44s @y[%s]@n%s\r\n",  
-                   counter, obj_index[i].vnum, obj_proto[i].short_description,
-                   item_types[obj_proto[i].type_flag],
+      send_to_char(ch, "%s%4d%s) [%s%-5d%s] %s%-*s %s[%s]%s%s\r\n",
+                   QGRN, counter, QNRM, QGRN, obj_index[i].vnum, QNRM,
+                   QCYN, count_color_chars(obj_proto[i].short_description)+44, obj_proto[i].short_description, QYEL,
+                   item_types[obj_proto[i].obj_flags.type_flag], QNRM,
                    obj_proto[i].proto_script ? " [TRIG]" : "");
     }
   }
