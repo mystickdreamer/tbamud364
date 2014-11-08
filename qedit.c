@@ -205,7 +205,7 @@ static void qedit_setup_new(struct descriptor_data *d)
   quest->value[0]   = 0;              /* Points for completing  */
   quest->value[1]   = 0;              /* Points for abandoning  */
   quest->value[2]   = 0;              /* Minimum level          */
-  quest->value[3]   = LVL_IMPL;       /* Maximim level          */
+  quest->value[3]   = CONFIG_LEVEL_CAP;       /* Maximim level          */
   quest->value[4]   = -1;             /* Time limit             */
   quest->value[5]   = NOBODY;         /* Mob to return object   */
   quest->value[6]   = 1;              /* Quantity of targets    */
@@ -658,8 +658,8 @@ void qedit_parse(struct descriptor_data *d, char *arg)
         break;
       }
     case QEDIT_LEVELMAX:
-      if (number < 0 || number > LVL_IMPL) {
-        write_to_output(d, "Level must be between 0 and %d!\r\n", LVL_IMPL);
+      if (number < 0 || number > CONFIG_LEVEL_CAP) {
+        write_to_output(d, "Level must be between 0 and %d!\r\n", CONFIG_LEVEL_CAP);
  write_to_output(d, "Enter maximum level to accept the quest : " );
         return;
       } else if (number < OLC_QUEST(d)->value[2]) {
