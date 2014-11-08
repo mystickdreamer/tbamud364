@@ -2808,12 +2808,12 @@ static int perform_set(struct char_data *ch, struct char_data *vict, int mode, c
     room_vnum rvnum;
 
     /* Check to make sure all the levels are correct */
-    if (GET_ADMLEVEL(ch) != ADMLVL_IMPL) {
+ /*   if (GET_ADMLEVEL(ch) != ADMLVL_IMPL) {
         if (!IS_NPC(vict) && GET_LEVEL(ch) < GET_LEVEL(vict) && vict != ch) {
             send_to_char(ch, "Maybe that's not such a great idea...\r\n");
             return (0);
         }
-    }
+    }*/
     if (GET_ADMLEVEL(ch) < set_fields[mode].level) {
         send_to_char(ch, "You are not godly enough for that!\r\n");
         return (0);
