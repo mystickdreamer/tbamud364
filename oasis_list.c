@@ -47,7 +47,6 @@ void list_shops(struct char_data *ch  , zone_rnum rnum, shop_vnum vmin, shop_vnu
 void list_triggers(struct char_data *ch, zone_rnum rnum, trig_vnum vmin, trig_vnum vmax);
 void list_zones(struct char_data *ch);
 void print_zone(struct char_data *ch, zone_vnum vnum);
-void list_guilds(struct char_data *ch  , zone_rnum rnum, guild_vnum vmin, guild_vnum vmax);
 
 /******************************************************************************/
 /** Ingame Commands                                                          **/
@@ -96,7 +95,6 @@ ACMD(do_oasis_list)
     case SCMD_OASIS_MLIST: list_mobiles(ch, rzone, vmin, vmax); break;
     case SCMD_OASIS_TLIST: list_triggers(ch, rzone, vmin, vmax); break;
     case SCMD_OASIS_SLIST: list_shops(ch, rzone, vmin, vmax); break;
-    case SCMD_OASIS_GLIST: list_guilds(ch, rzone, vmin, vmax); break;
     case SCMD_OASIS_QLIST: list_quests(ch, rzone, vmin, vmax); break;
     default: 
       send_to_char(ch, "You can't list that!\r\n");
