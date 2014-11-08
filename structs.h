@@ -1299,8 +1299,6 @@ struct recent_player {
 };
 
 
-/*******************  Config macros *********************/
-#define CONFIG_LEVEL_CAP	config_info.play.level_cap
 
 /* Config structs */
 
