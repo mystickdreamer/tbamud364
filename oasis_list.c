@@ -399,7 +399,7 @@ void print_zone(struct char_data *ch, zone_vnum vnum)
       size_trigs++;
   
     size_quests = count_quests(bottom, top);
-    size_shops = count_shops(bottom, top);
+  //  size_shops = count_shops(bottom, top);
   }
   
   /****************************************************************************/
