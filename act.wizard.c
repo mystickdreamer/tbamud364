@@ -270,7 +270,7 @@ ACMD(do_trans) {
         else if (victim == ch)
             send_to_char(ch, "That doesn't make much sense, does it?\r\n");
         else {
-            if ((GET_LEVEL(ch) < GET_LEVEL(victim)) && !IS_NPC(victim)) {
+            if ((GET_ADMLEVEL(ch) < GET_ADMLEVEL(victim)) && !IS_NPC(victim)) {
                 send_to_char(ch, "Go transfer someone your own size.\r\n");
                 return;
             }
