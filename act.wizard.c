@@ -2987,7 +2987,7 @@ static int perform_set(struct char_data *ch, struct char_data *vict, int mode, c
             SET_OR_REMOVE(PLR_FLAGS(vict), PLR_KILLER);
             break;
         case 25: /* level */
-            if ((!IS_NPC(vict) && value >= CONFIG_LEVEL_CAP) {
+            if (!IS_NPC(vict) && value >= CONFIG_LEVEL_CAP) {
                 send_to_char(ch, "You can't do that.\r\n");
                 return (0);
             }
