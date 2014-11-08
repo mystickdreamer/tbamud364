@@ -390,9 +390,15 @@ void print_zone(struct char_data *ch, zone_vnum vnum)
     if (i <= top_of_mobt)
       if (mob_index[i].vnum >= bottom && mob_index[i].vnum <= top)
         size_mobiles++;
+  for (i = 0; i<= top_shop; i++)
+    if (SHOP_NUM(i) >= bottom && SHOP_NUM(i) <= top)
+      size_shops++;
 
+  for (i = 0; i < top_of_trigt; i++)
+    if (trig_index[i]->vnum >= bottom && trig_index[i]->vnum <= top)
+      size_trigs++;
+  
     size_quests = count_quests(bottom, top);
-    size_guilds = count_guilds(bottom, top);
     size_shops = count_shops(bottom, top);
   }
   
