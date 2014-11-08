@@ -645,8 +645,8 @@ void qedit_parse(struct descriptor_data *d, char *arg)
       OLC_QUEST(d)->prereq = number;
       break;
     case QEDIT_LEVELMIN:
-      if (number < 0 || number > LVL_IMPL) {
-        write_to_output(d, "Level must be between 0 and %d!\r\n", LVL_IMPL);
+      if (number < 0 || number > CONFIG_LEVEL_CAP) {
+        write_to_output(d, "Level must be between 0 and %d!\r\n", CONFIG_LEVEL_CAP);
  write_to_output(d, "Enter minimum level to accept the quest : " );
         return;
       }  else if (number > OLC_QUEST(d)->value[3]) {
