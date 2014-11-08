@@ -1508,7 +1508,7 @@ void advance_level(struct char_data *ch)
   else
     GET_PRACTICES(ch) += MIN(2, MAX(1, wis_app[GET_WIS(ch)].bonus));
 
-  if (GET_LEVEL(ch) >= LVL_IMMORT) {
+  if (GET_ADMLEVEL(ch) >= ADMLVL_IMMORT) {
     for (i = 0; i < 3; i++)
       GET_COND(ch, i) = (char) -1;
     SET_BIT_AR(PRF_FLAGS(ch), PRF_HOLYLIGHT);
@@ -1532,7 +1532,7 @@ int backstab_mult(int level)
     return 4;	  /* level 14 - 20 */
   else if (level <= 28)
     return 5;	  /* level 21 - 28 */
-  else if (level < LVL_IMMORT)
+  else if (level < ADMLVL_IMMORT)
     return 6;	  /* all remaining mortal levels */
   else
     return 20;	  /* immortals */
@@ -1645,15 +1645,15 @@ void init_spell_levels(void)
 /* Function to return the exp required for each class/level */
 int level_exp(int chclass, int level)
 {
-  if (level > LVL_IMPL || level < 0) {
+  if (level > ADMLVL_IMPL || level < 0) {
     log("SYSERR: Requesting exp for invalid level %d!", level);
     return 0;
   }
 
   /* Gods have exp close to EXP_MAX.  This statement should never have to
    * changed, regardless of how many mortal or immortal levels exist. */
-   if (level > LVL_IMMORT) {
-     return EXP_MAX - ((LVL_IMPL - level) * 1000);
+   if (level > ADMLVL_IMMORT) {
+     return EXP_MAX - ((ADMLVL_IMPL - level) * 1000);
    }
 
   /* Exp required for normal mortals is below */
@@ -1693,7 +1693,7 @@ int level_exp(int chclass, int level)
       case 29: return 6850000;
       case 30: return 7400000;
       /* add new levels here */
-      case LVL_IMMORT: return 8000000;
+      case ADMLVL_IMMORT: return 8000000;
     }
     break;
 
@@ -1731,7 +1731,7 @@ int level_exp(int chclass, int level)
       case 29: return 6000000;
       case 30: return 6400000;
       /* add new levels here */
-      case LVL_IMMORT: return 7000000;
+      case ADMLVL_IMMORT: return 7000000;
     }
     break;
 
@@ -1769,7 +1769,7 @@ int level_exp(int chclass, int level)
       case 29: return 6300000;
       case 30: return 6650000;
       /* add new levels here */
-      case LVL_IMMORT: return 7000000;
+      case ADMLVL_IMMORT: return 7000000;
     }
     break;
 
@@ -1807,7 +1807,7 @@ int level_exp(int chclass, int level)
       case 29: return 6850000;
       case 30: return 7400000;
       /* add new levels here */
-      case LVL_IMMORT: return 8000000;
+      case ADMLVL_IMMORT: return 8000000;
     }
     break;
   }
@@ -1822,9 +1822,9 @@ int level_exp(int chclass, int level)
 /* Default titles of male characters. */
 const char *title_male(int chclass, int level)
 {
-  if (level <= 0 || level > LVL_IMPL)
+  if (level <= 0 || level > ADMLVL_IMPL)
     return "the Man";
-  if (level == LVL_IMPL)
+  if (level == ADMLVL_IMPL)
     return "the Implementor";
 
   switch (chclass) {
@@ -1861,9 +1861,9 @@ const char *title_male(int chclass, int level)
       case 28: return "the Shaman";
       case 29: return "the Keeper of Talismans";
       case 30: return "the Archmage";
-      case LVL_IMMORT: return "the Immortal Warlock";
-      case LVL_GOD: return "the Avatar of Magic";
-      case LVL_GRGOD: return "the God of Magic";
+      case ADMLVL_IMMORT: return "the Immortal Warlock";
+      case ADMLVL_GOD: return "the Avatar of Magic";
+      case ADMLVL_GRGOD: return "the God of Magic";
       default: return "the Mage";
     }
     break;
@@ -1891,9 +1891,9 @@ const char *title_male(int chclass, int level)
       case 19: return "the Arch Bishop";
       case 20: return "the Patriarch";
       /* no one ever thought up these titles 21-30 */
-      case LVL_IMMORT: return "the Immortal Cardinal";
-      case LVL_GOD: return "the Inquisitor";
-      case LVL_GRGOD: return "the God of Good and Evil";
+      case ADMLVL_IMMORT: return "the Immortal Cardinal";
+      case ADMLVL_GOD: return "the Inquisitor";
+      case ADMLVL_GRGOD: return "the God of Good and Evil";
       default: return "the Cleric";
     }
     break;
@@ -1921,9 +1921,9 @@ const char *title_male(int chclass, int level)
       case 19: return "the Brigand";
       case 20: return "the Cut-Throat";
       /* no one ever thought up these titles 21-30 */
-      case LVL_IMMORT: return "the Immortal Assassin";
-      case LVL_GOD: return "the Demi God of Thieves";
-      case LVL_GRGOD: return "the God of Thieves and Tradesmen";
+      case ADMLVL_IMMORT: return "the Immortal Assassin";
+      case ADMLVL_GOD: return "the Demi God of Thieves";
+      case ADMLVL_GRGOD: return "the God of Thieves and Tradesmen";
       default: return "the Thief";
     }
     break;
@@ -1951,9 +1951,9 @@ const char *title_male(int chclass, int level)
       case 19: return "the Cavalier";
       case 20: return "the Knight";
       /* no one ever thought up these titles 21-30 */
-      case LVL_IMMORT: return "the Immortal Warlord";
-      case LVL_GOD: return "the Extirpator";
-      case LVL_GRGOD: return "the God of War";
+      case ADMLVL_IMMORT: return "the Immortal Warlord";
+      case ADMLVL_GOD: return "the Extirpator";
+      case ADMLVL_GRGOD: return "the God of War";
       default: return "the Warrior";
     }
     break;
@@ -1966,9 +1966,9 @@ const char *title_male(int chclass, int level)
 /* Default titles of female characters. */
 const char *title_female(int chclass, int level)
 {
-  if (level <= 0 || level > LVL_IMPL)
+  if (level <= 0 || level > ADMLVL_IMPL)
     return "the Woman";
-  if (level == LVL_IMPL)
+  if (level == ADMLVL_IMPL)
     return "the Implementress";
 
   switch (chclass) {
@@ -2005,9 +2005,9 @@ const char *title_female(int chclass, int level)
       case 28: return "Shaman";
       case 29: return "the Keeper of Talismans";
       case 30: return "Archwitch";
-      case LVL_IMMORT: return "the Immortal Enchantress";
-      case LVL_GOD: return "the Empress of Magic";
-      case LVL_GRGOD: return "the Goddess of Magic";
+      case ADMLVL_IMMORT: return "the Immortal Enchantress";
+      case ADMLVL_GOD: return "the Empress of Magic";
+      case ADMLVL_GRGOD: return "the Goddess of Magic";
       default: return "the Witch";
     }
     break;
@@ -2035,9 +2035,9 @@ const char *title_female(int chclass, int level)
       case 19: return "the Arch Lady of the Church";
       case 20: return "the Matriarch";
       /* no one ever thought up these titles 21-30 */
-      case LVL_IMMORT: return "the Immortal Priestess";
-      case LVL_GOD: return "the Inquisitress";
-      case LVL_GRGOD: return "the Goddess of Good and Evil";
+      case ADMLVL_IMMORT: return "the Immortal Priestess";
+      case ADMLVL_GOD: return "the Inquisitress";
+      case ADMLVL_GRGOD: return "the Goddess of Good and Evil";
       default: return "the Cleric";
     }
     break;
@@ -2065,9 +2065,9 @@ const char *title_female(int chclass, int level)
       case 19: return "the Brigand";
       case 20: return "the Cut-Throat";
       /* no one ever thought up these titles 21-30 */
-      case LVL_IMMORT: return "the Immortal Assassin";
-      case LVL_GOD: return "the Demi Goddess of Thieves";
-      case LVL_GRGOD: return "the Goddess of Thieves and Tradesmen";
+      case ADMLVL_IMMORT: return "the Immortal Assassin";
+      case ADMLVL_GOD: return "the Demi Goddess of Thieves";
+      case ADMLVL_GRGOD: return "the Goddess of Thieves and Tradesmen";
       default: return "the Thief";
     }
     break;
@@ -2095,9 +2095,9 @@ const char *title_female(int chclass, int level)
       case 19: return "the Cavalier";
       case 20: return "the Lady Knight";
       /* no one ever thought up these titles 21-30 */
-      case LVL_IMMORT: return "the Immortal Lady of War";
-      case LVL_GOD: return "the Queen of Destruction";
-      case LVL_GRGOD: return "the Goddess of War";
+      case ADMLVL_IMMORT: return "the Immortal Lady of War";
+      case ADMLVL_GOD: return "the Queen of Destruction";
+      case ADMLVL_GRGOD: return "the Goddess of War";
       default: return "the Warrior";
     }
     break;
