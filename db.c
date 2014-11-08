@@ -3849,10 +3849,10 @@ void load_config(void) {
                     CONFIG_IDLE_VOID = num;
                 else if (!str_cmp(tag, "idle_rent_time"))
                     CONFIG_IDLE_RENT_TIME = num;
-                else if (!str_cmp(tag, "idle_max_level"))
+                else if (!str_cmp(tag, "idle_max_level")){
                     if (num >= CONFIG_LEVEL_CAP)
                         num += 1 - CONFIG_LEVEL_CAP;
-                CONFIG_IDLE_MAX_LEVEL = num;
+                CONFIG_IDLE_MAX_LEVEL = num;}
                 else if (!str_cmp(tag, "immort_start_room"))
                     CONFIG_IMMORTAL_START = num;
                 else if (!str_cmp(tag, "ibt_autosave"))
@@ -3901,10 +3901,10 @@ void load_config(void) {
                     parse_at(CONFIG_MENU);
                 } else if (!str_cmp(tag, "min_rent_cost"))
                     CONFIG_MIN_RENT_COST = num;
-                else if (!str_cmp(tag, "min_wizlist_lev"))
+                else if (!str_cmp(tag, "min_wizlist_lev")){
                     if (num >= CONFIG_LEVEL_CAP)
                         num += 1 - CONFIG_LEVEL_CAP;
-                CONFIG_MIN_WIZLIST_LEV = num;
+                CONFIG_MIN_WIZLIST_LEV = num;}
                 else if (!str_cmp(tag, "mortal_start_room"))
                     CONFIG_MORTAL_START = num;
                 else if (!str_cmp(tag, "map_option"))
