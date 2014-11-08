@@ -225,9 +225,10 @@ void list_mobiles(struct char_data *ch, zone_rnum rnum, zone_vnum vmin, zone_vnu
     if (mob_index[i].vnum >= bottom && mob_index[i].vnum <= top) {
       counter++;
       
-      send_to_char(ch, "@g%4d@n) [@g%-5d@n] @c%-44.44s @y[%4d]@n%s\r\n",
-                   counter, mob_index[i].vnum, mob_proto[i].short_descr, 
-                   mob_proto[i].level + mob_proto[i].level_adj + mob_proto[i].race_level, 
+      send_to_char(ch, "%s%4d%s) [%s%-5d%s] %s%-*s %s[%4d]%s%s\r\n",
+                   QGRN, counter, QNRM, QGRN, mob_index[i].vnum, QNRM,
+                   QCYN, count_color_chars(mob_proto[i].player.short_descr)+44, mob_proto[i].player.short_descr,
+                   QYEL, mob_proto[i].player.level, QNRM,
                    mob_proto[i].proto_script ? " [TRIG]" : "");
     }
   }
