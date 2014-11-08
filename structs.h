@@ -1298,6 +1298,10 @@ struct recent_player {
     struct recent_player *next; /* Pointer to the next instance    */
 };
 
+
+/*******************  Config macros *********************/
+#define CONFIG_LEVEL_CAP	config_info.play.level_cap
+
 /* Config structs */
 
 /** The game configuration structure used for configurating the game play
