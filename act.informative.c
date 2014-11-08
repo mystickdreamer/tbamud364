@@ -1737,10 +1737,10 @@ ACMD(do_levels)
   for (i = 2; i < CONFIG_LEVEL_CAP; i++) {
     if (i == CONFIG_LEVEL_CAP - 1)
       nlen = snprintf(buf + len, sizeof(buf) - len, "[%2d] %8d          : \r\n",
-           CONFIG_LEVEL_CAP - 1, level_exp(CONFIG_LEVEL_CAP - 1, GET_REAL_RACE(ch)));
+           CONFIG_LEVEL_CAP - 1, level_exp(CONFIG_LEVEL_CAP - 1));
     else
     nlen = snprintf(buf+len, sizeof(buf)-len, "[%2d] %8d-%-8d : \r\n", (int)i,
-		level_exp(i, GET_RACE(ch)), level_exp(i+1, GET_REAL_RACE(ch)) - 1);
+		level_exp(i, GET_RACE(ch)), level_exp(i+1) - 1);
     if (len + nlen >= sizeof(buf) || nlen < 0)
       break;
     len += nlen;
