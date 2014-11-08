@@ -318,7 +318,7 @@ cpp_extern const struct command_info cmd_info[] = {
     { "transfer", "transfer", POS_SLEEPING, do_trans, ADMLVL_GOD, 0},
     { "trigedit", "trigedit", POS_DEAD, do_oasis_trigedit, ADMLVL_BUILDER, 0},
     { "typo", "typo", POS_DEAD, do_ibt, 0, SCMD_TYPO},
-    { "tlist", "tlist", POS_DEAD, do_oasis_list, LVL_BUILDER, SCMD_OASIS_TLIST},
+    { "tlist", "tlist", POS_DEAD, do_oasis_list, ADMLVL_BUILDER, SCMD_OASIS_TLIST},
     { "tcopy", "tcopy", POS_DEAD, do_oasis_copy, ADMLVL_GOD, CON_TRIGEDIT},
     { "tstat", "tstat", POS_DEAD, do_tstat, ADMLVL_BUILDER, 0},
 
