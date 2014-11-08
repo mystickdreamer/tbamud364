@@ -74,7 +74,7 @@ int idle_void = 8;
 int idle_rent_time = 48;
 
 /* This level and up is immune to idling, LVL_IMPL+1 will disable it. */
-int idle_max_level = LVL_GOD;
+int idle_max_level = ADMLVL_GOD;
 
 /* Should items in death traps automatically be junked? */
 int dts_are_dumps = YES;
@@ -95,6 +95,16 @@ const char *NOEFFECT = "Nothing seems to happen.\r\n";
  * setting of 'NO' means to not go through the doors while 'YES' will pass
  * through doors to find the target. */
 int track_through_doors = YES;
+
+/*
+ * This defines the cap for player character levels. It is impossible for
+ * a player to level up to the cap; so if the cap is 101, the maximum
+ * possible player level is 100.
+ *
+ * You should set this to whatever is appropriate for your doing your
+ * highest level areas without much difficulty. No risk, no reward.
+ */
+int level_cap = 101;
 
 /* If you do not want mortals to level up to immortal once they have enough
  * experience, then set this to YES. Subtracting this from LVL_IMMORT gives
