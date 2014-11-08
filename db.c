@@ -3688,7 +3688,7 @@ static void load_default_config(void) {
     CONFIG_OK = strdup(OK);
     CONFIG_NOPERSON = strdup(NOPERSON);
     CONFIG_NOEFFECT = strdup(NOEFFECT);
-    CONFIG_LEVEL_CAP = level_cap;
+//    CONFIG_LEVEL_CAP = level_cap;
     CONFIG_TRACK_T_DOORS = track_through_doors;
     CONFIG_NO_MORT_TO_IMMORT = no_mort_to_immort;
     CONFIG_DISP_CLOSED_DOORS = display_closed_doors;
