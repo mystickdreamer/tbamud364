@@ -48,13 +48,13 @@
 /* Format: vnum, read lvl, write lvl, remove lvl, filename, 0 at end. Be sure 
  * to also change NUM_OF_BOARDS in board.h*/
 struct board_info_type board_info[NUM_OF_BOARDS] = {
-  {3099, 0, 0, ADMLVL_GOD, LIB_ETC "board.mortal", 0},
+  {3099, ADMLVL_NONE, ADMLVL_NONE, ADMLVL_GOD, LIB_ETC "board.mortal", 0},
   {3098, ADMLVL_IMMORT, ADMLVL_IMMORT, ADMLVL_GRGOD, LIB_ETC "board.immortal", 0},
   {3097, ADMLVL_IMMORT, ADMLVL_GRGOD, ADMLVL_IMPL, LIB_ETC "board.freeze", 0},
-  {3096, 0, 0, ADMLVL_IMMORT, LIB_ETC "board.social", 0},
-  {1226, 0, 0, ADMLVL_IMPL, LIB_ETC "board.builder", 0},
-  {1227, 0, 0, ADMLVL_IMPL, LIB_ETC "board.staff", 0},
-  {1228, 0, 0, ADMLVL_IMPL, LIB_ETC "board.advertising", 0},
+  {3096, ADMLVL_NONE, ADMLVL_NONE, ADMLVL_IMMORT, LIB_ETC "board.social", 0},
+  {1226, ADMLVL_BUILDER, ADMLVL_BUILDER, ADMLVL_IMPL, LIB_ETC "board.builder", 0},
+  {1227, ADMLVL_IMMORT, ADMLVL_IMMORT, ADMLVL_IMPL, LIB_ETC "board.staff", 0},
+  {1228, ADMLVL_NONE, ADMLVL_NONE, ADMLVL_IMPL, LIB_ETC "board.advertising", 0},
 };
 
 /* local (file scope) global variables */
@@ -176,7 +176,7 @@ int board_write_message(int board_type, struct char_data *ch, char *arg, struct 
   time_t ct;
   char buf[MAX_INPUT_LENGTH], buf2[MAX_NAME_LENGTH + 3], tmstr[MAX_STRING_LENGTH];
 
-  if (GET_LEVEL(ch) < WRITE_LVL(board_type)) {
+  if (GET_ADMLEVEL(ch) < WRITE_LVL(board_type)) {
     send_to_char(ch, "You are not holy enough to write on this board.\r\n");
     return (1);
   }
@@ -206,7 +206,7 @@ int board_write_message(int board_type, struct char_data *ch, char *arg, struct 
   snprintf(buf2, sizeof(buf2), "(%s)", GET_NAME(ch));
   snprintf(buf, sizeof(buf), "%s %-12s :: %s", tmstr, buf2, arg);
   NEW_MSG_INDEX(board_type).heading = strdup(buf);
-  NEW_MSG_INDEX(board_type).level = GET_LEVEL(ch);
+  NEW_MSG_INDEX(board_type).level = GET_ADMLEVEL(ch);
 
   send_to_char(ch, "Write your message.\r\n");
   send_editor_help(ch->desc);
@@ -232,7 +232,7 @@ int board_show_board(int board_type, struct char_data *ch, char *arg, struct obj
   if (!*tmp || !isname(tmp, board->name))
     return (0);
 
-  if (GET_LEVEL(ch) < READ_LVL(board_type)) {
+  if (GET_ADMLEVEL(ch) < READ_LVL(board_type)) {
     send_to_char(ch, "You try but fail to understand the holy words.\r\n");
     return (1);
   }
@@ -295,7 +295,7 @@ int board_display_msg(int board_type, struct char_data *ch, char *arg, struct ob
   if (!(msg = atoi(number)))
     return (0);
 
-  if (GET_LEVEL(ch) < READ_LVL(board_type)) {
+  if (GET_ADMLEVEL(ch) < READ_LVL(board_type)) {
     send_to_char(ch, "You try but fail to understand the holy words.\r\n");
     return (1);
   }
@@ -366,12 +366,12 @@ int board_remove_msg(int board_type, struct char_data *ch, char *arg, struct obj
     return (1);
   }
   snprintf(buf, sizeof(buf), "(%s)", GET_NAME(ch));
-  if (GET_LEVEL(ch) < REMOVE_LVL(board_type) &&
+  if (GET_ADMLEVEL(ch) < REMOVE_LVL(board_type) &&
       !(strstr(MSG_HEADING(board_type, ind), buf))) {
     send_to_char(ch, "You are not holy enough to remove other people's messages.\r\n");
     return (1);
   }
-  if (GET_LEVEL(ch) < MSG_LEVEL(board_type, ind)) {
+  if (GET_ADMLEVEL(ch) < MSG_LEVEL(board_type, ind)) {
     send_to_char(ch, "You can't remove a message holier than yourself.\r\n");
     return (1);
   }
