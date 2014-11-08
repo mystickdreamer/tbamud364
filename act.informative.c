@@ -1654,9 +1654,11 @@ ACMD(do_where) {
     else
         perform_mortal_where(ch, arg);
 }
-/*
+
 ACMD(do_levels) {
-    char buf[MAX_STRING_LENGTH], arg[MAX_STRING_LENGTH];
+    send_to_char(ch, "This is being fixed. \r\n");
+}
+/*    char buf[MAX_STRING_LENGTH], arg[MAX_STRING_LENGTH];
     size_t len = 0, nlen;
     int i, ret, min_lev = 1, max_lev = CONFIG_LEVEL_CAP, val;
 
