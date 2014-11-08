@@ -1381,7 +1381,8 @@ struct autowiz_data {
     int use_autowiz; /**< Use the autowiz feature?   */
     int min_wizlist_lev; /**< Minimun level to show on wizlist.  */
 };
-
+/*******************  Config macros *********************/
+#define CONFIG_LEVEL_CAP	config_info.play.level_cap
 /**
  Main Game Configuration Structure.
  Global variables that can be changed within the game are held within this
