@@ -1722,7 +1722,7 @@ ACMD(do_levels) {
             ADMLVL_IMMORT, level_exp(GET_CLASS(ch), ADMLVL_IMMORT));
     page_string(ch->desc, buf, TRUE);
 }
-*/
+
 ACMD(do_consider) {
     char buf[MAX_INPUT_LENGTH];
     struct char_data *victim;
