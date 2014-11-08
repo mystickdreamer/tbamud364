@@ -3421,7 +3421,7 @@ void clear_object(struct obj_data *obj)
 
   obj->item_number = NOTHING;
   IN_ROOM(obj) = NOWHERE;
-  obj->worn_on = NOWHERE;
+  obj->worn_on = -1;
 }
 
 /* Called during character creation after picking character class (and then
