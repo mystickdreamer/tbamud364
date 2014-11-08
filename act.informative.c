@@ -1739,7 +1739,7 @@ ACMD(do_levels)
       nlen = snprintf(buf + len, sizeof(buf) - len, "[%2d] %8d          : \r\n",
            CONFIG_LEVEL_CAP - 1, level_exp(CONFIG_LEVEL_CAP - 1));
     else
-    nlen = snprintf(buf+len, sizeof(buf)-len, "[%2d] %4d-%-4d : \r\n", (int)i,
+    nlen = snprintf(buf+len, sizeof(buf)-len, "[%d] %4d-%-4d : \r\n", (int)i,
 		level_exp(i), level_exp(i) - 1);
     if (len + nlen >= sizeof(buf) || nlen < 0)
       break;
