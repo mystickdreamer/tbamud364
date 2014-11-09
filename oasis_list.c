@@ -362,6 +362,12 @@ ACMD(do_zlist) {
 
 ACMD(do_olist){
   
+    char arg[MAX_INPUT_LENGTH], arg2[MAX_INPUT_LENGTH];
+    int i;
+    zone_rnum rzone = NOWHERE;
+    room_rnum vmin = NOWHERE;
+    room_rnum vmax = NOWHERE;
+    
     two_arguments(argument, arg, arg2);
 
             if (is_abbrev(arg, "help")) {
