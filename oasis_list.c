@@ -355,8 +355,8 @@ ACMD(do_zlist) {
     zone_rnum rzone = NOWHERE;
     char arg[MAX_INPUT_LENGTH];
     
-    if(arg){
-        smin = arg;
+    if(argument){
+        smin = argument;
         use_name = true;
     }
     
