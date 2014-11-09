@@ -1538,7 +1538,7 @@ ACMD(do_restore) {
         }
     } else if (!(vict = get_char_vis(ch, buf, NULL, FIND_CHAR_WORLD)))
         send_to_char(ch, "%s", CONFIG_NOPERSON);
-    else if (!IS_NPC(vict) && ch != vict && GET_LEVEL(vict) >= GET_LEVEL(ch))
+    else if (!IS_NPC(vict) && ch != vict && GET_ADMLEVEL(vict) >= GET_ADMLEVEL(ch))
         send_to_char(ch, "They don't need your help.\r\n");
     else {
         GET_HIT(vict) = GET_MAX_HIT(vict);
@@ -1584,10 +1584,10 @@ static void perform_immort_invis(struct char_data *ch, int level) {
     for (tch = world[IN_ROOM(ch)].people; tch; tch = tch->next_in_room) {
         if (tch == ch || IS_NPC(tch))
             continue;
-        if (GET_LEVEL(tch) >= GET_INVIS_LEV(ch) && GET_LEVEL(tch) < level)
+        if (GET_ADMLEVEL(tch) >= GET_INVIS_LEV(ch) && GET_ADMLEVEL(tch) < level)
             act("You blink and suddenly realize that $n is gone.", FALSE, ch, 0,
                 tch, TO_VICT);
-        if (GET_LEVEL(tch) < GET_INVIS_LEV(ch) && GET_LEVEL(tch) >= level)
+        if (GET_ADMLEVEL(tch) < GET_INVIS_LEV(ch) && GET_ADMLEVEL(tch) >= level)
             act("You suddenly realize that $n is standing beside you.", FALSE, ch, 0,
                 tch, TO_VICT);
     }
@@ -1610,10 +1610,10 @@ ACMD(do_invis) {
         if (GET_INVIS_LEV(ch) > 0)
             perform_immort_vis(ch);
         else
-            perform_immort_invis(ch, GET_LEVEL(ch));
+            perform_immort_invis(ch, GET_ADMLEVEL(ch));
     } else {
         level = atoi(arg);
-        if (level > GET_LEVEL(ch))
+        if (level > GET_ADMLEVEL(ch))
             send_to_char(ch, "You can't go invisible above your own level.\r\n");
         else if (level < 1)
             perform_immort_vis(ch);
@@ -1660,7 +1660,7 @@ ACMD(do_dc) {
         send_to_char(ch, "No such connection.\r\n");
         return;
     }
-    if (d->character && GET_LEVEL(d->character) >= GET_LEVEL(ch)) {
+    if (d->character && GET_ADMLEVEL(d->character) >= GET_ADMLEVEL(ch)) {
         if (!CAN_SEE(ch, d->character))
             send_to_char(ch, "No such connection.\r\n");
         else
@@ -1999,7 +1999,7 @@ ACMD(do_last) {
             return;
         }
 
-        if ((GET_LEVEL(vict) > GET_LEVEL(ch)) && (GET_ADMLEVEL(ch) < ADMLVL_IMPL)) {
+        if (GET_ADMLEVEL(ch) < ADMLVL_IMPL) {
             send_to_char(ch, "You are not sufficiently godly for that!\r\n");
             return;
         }
@@ -2065,8 +2065,8 @@ ACMD(do_force) {
             send_to_char(ch, "%s", CONFIG_NOPERSON);
         else if (!IS_NPC(vict) && GET_ADMLEVEL(ch) < ADMLVL_GOD)
             send_to_char(ch, "You cannot force players.\r\n");
-        else if (!IS_NPC(vict) && GET_LEVEL(ch) <= GET_LEVEL(vict))
-            send_to_char(ch, "No, no, no!\r\n");
+        else if (!IS_NPC(vict) && GET_ADMLEVEL(ch) <= GET_ADMLEVEL(vict))
+            send_to_char(ch, "You cannot force somebody bigger than you to do anything!\r\n");
         else {
             send_to_char(ch, "%s", CONFIG_OK);
             act(buf1, TRUE, ch, NULL, vict, TO_VICT);
@@ -2080,7 +2080,7 @@ ACMD(do_force) {
 
         for (vict = world[IN_ROOM(ch)].people; vict; vict = next_force) {
             next_force = vict->next_in_room;
-            if (!IS_NPC(vict) && GET_LEVEL(vict) >= GET_LEVEL(ch))
+            if (!IS_NPC(vict) && GET_ADMLEVEL(vict) >= GET_ADMLEVEL(ch))
                 continue;
             act(buf1, TRUE, ch, NULL, vict, TO_VICT);
             command_interpreter(vict, to_force);
@@ -2092,7 +2092,7 @@ ACMD(do_force) {
         for (i = descriptor_list; i; i = next_desc) {
             next_desc = i->next;
 
-            if (STATE(i) != CON_PLAYING || !(vict = i->character) || (!IS_NPC(vict) && GET_LEVEL(vict) >= GET_LEVEL(ch)))
+            if (STATE(i) != CON_PLAYING || !(vict = i->character) || (!IS_NPC(vict) && GET_ADMLEVEL(vict) >= GET_ADMLEVEL(ch)))
                 continue;
             act(buf1, TRUE, ch, NULL, vict, TO_VICT);
             command_interpreter(vict, to_force);
@@ -2122,7 +2122,7 @@ ACMD(do_wiznet) {
             if (is_number(buf1)) {
                 half_chop(argument + 1, buf1, argument);
                 level = MAX(atoi(buf1), ADMLVL_IMMORT);
-                if (level > GET_LEVEL(ch)) {
+                if (level > GET_ADMLEVEL(ch)) {
                     send_to_char(ch, "You can't wizline above your own level.\r\n");
                     return;
                 }
@@ -2170,7 +2170,7 @@ ACMD(do_wiznet) {
     }
 
     for (d = descriptor_list; d; d = d->next) {
-        if (IS_PLAYING(d) && (GET_LEVEL(d->character) >= level) &&
+        if (IS_PLAYING(d) && (GET_ADMLEVEL(d->character) >= level) &&
                 (!PRF_FLAGGED(d->character, PRF_NOWIZ))
                 && (d != ch->desc || !(PRF_FLAGGED(d->character, PRF_NOREPEAT)))) {
             if (CAN_SEE(d->character, ch))
@@ -2235,7 +2235,7 @@ ACMD(do_wizutil) {
         send_to_char(ch, "There is no such player.\r\n");
     else if (IS_NPC(vict))
         send_to_char(ch, "You can't do that to a mob!\r\n");
-    else if (GET_LEVEL(vict) >= GET_LEVEL(ch) && vict != ch)
+    else if (GET_ADMLEVEL(vict) >= GET_ADMLEVEL(ch) && vict != ch)
         send_to_char(ch, "Hmmm...you'd better not.\r\n");
     else {
         switch (subcmd) {
@@ -2280,7 +2280,7 @@ ACMD(do_wizutil) {
                     return;
                 }
                 SET_BIT_AR(PLR_FLAGS(vict), PLR_FROZEN);
-                GET_FREEZE_LEV(vict) = GET_LEVEL(ch);
+                GET_FREEZE_LEV(vict) = GET_ADMLEVEL(ch);
                 send_to_char(vict, "A bitter wind suddenly rises and drains every erg of heat from your body!\r\nYou feel frozen!\r\n");
                 send_to_char(ch, "Frozen.\r\n");
                 act("A sudden cold wind conjured from nowhere freezes $n!", FALSE, vict, 0, 0, TO_ROOM);
@@ -2291,7 +2291,7 @@ ACMD(do_wizutil) {
                     send_to_char(ch, "Sorry, your victim is not morbidly encased in ice at the moment.\r\n");
                     return;
                 }
-                if (GET_FREEZE_LEV(vict) > GET_LEVEL(ch)) {
+                if (GET_FREEZE_LEV(vict) > GET_ADMLEVEL(ch)) {
                     send_to_char(ch, "Sorry, a level %d God froze %s... you can't unfreeze %s.\r\n",
                             GET_FREEZE_LEV(vict), GET_NAME(vict), HMHR(vict));
                     return;
@@ -2430,7 +2430,7 @@ ACMD(do_show) {
     if (!*argument) {
         send_to_char(ch, "Show options:\r\n");
         for (j = 0, i = 1; fields[i].level; i++)
-            if (fields[i].level <= GET_LEVEL(ch))
+            if (fields[i].level <= GET_ADMLEVEL(ch))
                 send_to_char(ch, "%-15s%s", fields[i].cmd, (!(++j % 5) ? "\r\n" : ""));
         send_to_char(ch, "\r\n");
         return;
@@ -2641,7 +2641,7 @@ ACMD(do_show) {
             for (d = descriptor_list; d; d = d->next) {
                 if (d->snooping == NULL || d->character == NULL)
                     continue;
-                if (STATE(d) != CON_PLAYING || GET_LEVEL(ch) < GET_LEVEL(d->character))
+                if (STATE(d) != CON_PLAYING || GET_ADMLEVEL(ch) < GET_ADMLEVEL(d->character))
                     continue;
                 if (!CAN_SEE(ch, d->character) || IN_ROOM(d->character) == NOWHERE)
                     continue;
@@ -2970,7 +2970,7 @@ static int perform_set(struct char_data *ch, struct char_data *vict, int mode, c
                 send_to_char(ch, "You aren't godly enough for that!\r\n");
                 return (0);
             }
-            GET_INVIS_LEV(vict) = RANGE(0, GET_LEVEL(vict));
+            GET_INVIS_LEV(vict) = RANGE(0, GET_ADMLEVEL(vict));
             break;
         case 23: /* invistart */
             SET_OR_REMOVE(PLR_FLAGS(vict), PLR_INVSTART);
@@ -3301,7 +3301,7 @@ ACMD(do_set) {
         CREATE(cbuf->player_specials, struct player_special_data, 1);
         new_mobile_data(cbuf);
         if ((player_i = load_char(name, cbuf)) > -1) {
-            if (GET_LEVEL(cbuf) > GET_LEVEL(ch)) {
+            if (GET_ADMLEVEL(cbuf) > GET_ADMLEVEL(ch)) {
                 free_char(cbuf);
                 send_to_char(ch, "Sorry, you can't do that.\r\n");
                 return;
