@@ -346,11 +346,11 @@ void perform_obj_name_list(struct char_data * ch, char *arg) {
 
 ACMD(do_zlist) {
     
-    char smin[MAX_INPUT_LENGTH];
-    bool use_name = FALSE;
-    room_rnum vmin = NOWHERE;
-    room_rnum vmax = NOWHERE;
-    zone_rnum rzone = NOWHERE;
+//    char smin[MAX_INPUT_LENGTH];
+//    bool use_name = FALSE;
+//    room_rnum vmin = NOWHERE;
+//    room_rnum vmax = NOWHERE;
+//    zone_rnum rzone = NOWHERE;
     
         list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
 
