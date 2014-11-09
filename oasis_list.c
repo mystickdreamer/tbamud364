@@ -355,13 +355,17 @@ ACMD(do_zlist) {
     zone_rnum rzone = NOWHERE;
     char arg[MAX_INPUT_LENGTH];
     
+    if(arg){
+        smin = arg;
+        use_name = true;
+    }
     
     
  //       list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
-    if (!*arg) /* No args - list all zones */
+    if (!*smin) /* No args - list all zones */
                 list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
-            else if (arg) /* Builder name as arg */
-                list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, arg);
+            else if (use_name) /* Builder name as arg */
+                list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, smin);
             else /* Numerical args */
                 list_zones(ch, rzone, vmin, vmax, NULL);
 }
