@@ -356,7 +356,7 @@ ACMD(do_zlist) {
     char arg[MAX_INPUT_LENGTH];
     
     if(argument){
-        smin = argument;
+        argument = smin;
         use_name = true;
     }
     
