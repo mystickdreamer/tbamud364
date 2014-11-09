@@ -361,7 +361,7 @@ ACMD(do_zlist) {
     } else if (!*smax) {
         rzone = real_zone(atoi(smin));
 
-        if ((rzone == NOWHERE || rzone == 0) && subcmd == SCMD_OASIS_ZLIST && !isdigit(*smin)) {
+        if ((rzone == NOWHERE || rzone == 0) && !isdigit(*smin)) {
             /* Must be zlist, with builder name as arg */
             use_name = TRUE;
         } else if (rzone == NOWHERE) {
