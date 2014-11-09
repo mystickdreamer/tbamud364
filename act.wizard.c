@@ -1445,10 +1445,6 @@ ACMD(do_advance) {
         return;
     }
 
-    if (GET_ADMLEVEL < ADMLVL_GOD) {
-        send_to_char(ch, "Maybe that's not such a great idea.\r\n");
-        return;
-    }
     if (IS_NPC(victim)) {
         send_to_char(ch, "NO!  Not on NPC's.\r\n");
         return;
@@ -1462,10 +1458,6 @@ ACMD(do_advance) {
         return;
     }
 
-    if (newlevel > GET_LEVEL(ch)) {
-        send_to_char(ch, "Yeah, right.\r\n");
-        return;
-    }
     if (newlevel == GET_LEVEL(victim)) {
         send_to_char(ch, "They are already at that level.\r\n");
         return;
