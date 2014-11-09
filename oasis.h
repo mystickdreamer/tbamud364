@@ -478,6 +478,7 @@ void print_zone(struct char_data *ch, zone_rnum rnum);
 ACMD(do_oasis_links);
 ACMD(do_oasis_list);
 ACMD(do_zlist);
+ACMD)do_olist);
 
 
 #endif /* _OASIS_H_ */
