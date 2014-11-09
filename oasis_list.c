@@ -352,7 +352,6 @@ ACMD(do_zlist) {
     room_rnum vmax = NOWHERE;
     zone_rnum rzone = NOWHERE;
     
-    if (!*smin) /* No args - list all zones */
         list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
     else if (use_name) /* Builder name as arg */
         list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, smin);
