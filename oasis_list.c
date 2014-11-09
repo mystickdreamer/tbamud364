@@ -353,10 +353,8 @@ ACMD(do_zlist) {
     zone_rnum rzone = NOWHERE;
     
         list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
-    else if (use_name) /* Builder name as arg */
-        list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, smin);
-    else /* Numerical args */
-        list_zones(ch, rzone, vmin, vmax, NULL);
+
+ //       list_zones(ch, rzone, vmin, vmax, NULL);
    
 }
 
