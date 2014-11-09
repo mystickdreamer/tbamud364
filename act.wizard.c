@@ -4255,7 +4255,7 @@ ACMD(do_file) {
     if (!*argument) {
         send_to_char(ch, "USAGE: file <filename> <num lines>\r\n\r\nFile options:\r\n");
         for (j = 0, i = 0; fields[i].level; i++)
-            if (fields[i].level <= GET_LEVEL(ch))
+            if (fields[i].level <= GET_ADMLEVEL(ch))
                 send_to_char(ch, "%-15s%s\r\n", fields[i].cmd, fields[i].file);
         return;
     }
@@ -4275,7 +4275,7 @@ ACMD(do_file) {
         return;
     }
 
-    if (GET_LEVEL(ch) < fields[l].level) {
+    if (GET_ADMLEVEL(ch) < fields[l].level) {
         send_to_char(ch, "You have not achieved a high enough level to view '%s'.\r\n",
                 fields[l].cmd);
         return;
