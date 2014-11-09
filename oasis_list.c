@@ -350,6 +350,8 @@ ACMD(do_zlist) {
     bool use_name = FALSE;
     room_rnum vmin = NOWHERE;
     room_rnum vmax = NOWHERE;
+    char smin[MAX_INPUT_LENGTH];
+    char smax[MAX_INPUT_LENGTH];
     zone_rnum rzone = NOWHERE;
     char arg[MAX_INPUT_LENGTH];
     
