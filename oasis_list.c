@@ -345,21 +345,74 @@ void perform_obj_name_list(struct char_data * ch, char *arg) {
 }
 
 ACMD(do_zlist) {
-    
-    
-/*    bool use_name = FALSE;
-    room_rnum vmin = NOWHERE;
-    room_rnum vmax = NOWHERE;
-    char smin[MAX_INPUT_LENGTH];
-    char smax[MAX_INPUT_LENGTH];
-    zone_rnum rzone = NOWHERE;
-    char arg[MAX_INPUT_LENGTH];
-*/    
 
-    
-       list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
+/*
+        bool use_name = FALSE;
+        room_rnum vmin = NOWHERE;
+        room_rnum vmax = NOWHERE;
+        char smin[MAX_INPUT_LENGTH];
+        char smax[MAX_INPUT_LENGTH];
+        zone_rnum rzone = NOWHERE;
+        char arg[MAX_INPUT_LENGTH];
+     */
+
+    list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
 
 }
+
+ACMD(do_olist){
+  
+    two_arguments(argument, arg, arg2);
+
+            if (is_abbrev(arg, "help")) {
+                send_to_char(ch, "Usage: %solist <zone>%s        - List objects in a zone\r\n", QYEL, QNRM);
+                send_to_char(ch, "       %solist <vnum> <vnum>%s - List a range of objects by vnum\r\n", QYEL, QNRM);
+                send_to_char(ch, "       %solist <name>%s        - List all named objects with count\r\n", QYEL, QNRM);
+                send_to_char(ch, "       %solist type <num>%s    - List all objects of a specified type\r\n", QYEL, QNRM);
+                send_to_char(ch, "       %solist affect <num>%s  - List top %d objects with affect\r\n", QYEL, QNRM, MAX_OBJ_LIST);
+                send_to_char(ch, "Just type %solist affect%s or %solist type%s to view available options\r\n", QYEL, QNRM, QYEL, QNRM);
+                return;
+            } else if (is_abbrev(arg, "type") || is_abbrev(arg, "affect")) {
+                if (is_abbrev(arg, "type")) {
+                    if (!*arg2) {
+                        send_to_char(ch, "Which object type do you want to list?\r\n");
+                        for (i = 1; i < NUM_ITEM_TYPES; i++) {
+                            send_to_char(ch, "%s%2d%s-%s%-14s%s", QNRM, i, QNRM, QYEL, item_types[i], QNRM);
+                            if (!(i % 4)) send_to_char(ch, "\r\n");
+                        }
+                        send_to_char(ch, "\r\n");
+                        send_to_char(ch, "Usage: %solist type <num>%s\r\n", QYEL, QNRM);
+                        send_to_char(ch, "Displays objects of the selected type.\r\n");
+
+                        return;
+                    }
+                    perform_obj_type_list(ch, arg2);
+                } else { /* Assume arg = affect */
+                    if (!*arg2) {
+                        send_to_char(ch, "Which object affect do you want to list?\r\n");
+                        for (i = 0; i < NUM_APPLIES; i++) {
+                            if (i == APPLY_CLASS) /* Special Case 1 - Weapon Dam */
+                                send_to_char(ch, "%s%2d-%s%-14s%s", QNRM, i, QYEL, "Weapon Dam", QNRM);
+                            else if (i == APPLY_LEVEL) /* Special Case 2 - Armor AC Apply */
+                                send_to_char(ch, "%s%2d-%s%-14s%s", QNRM, i, QYEL, "AC Apply", QNRM);
+                            else
+                                send_to_char(ch, "%s%2d-%s%-14s%s", QNRM, i, QYEL, apply_types[i], QNRM);
+                            if (!((i + 1) % 4)) send_to_char(ch, "\r\n");
+                        }
+                        send_to_char(ch, "\r\n");
+                        send_to_char(ch, "Usage: %solist affect <num>%s\r\n", QYEL, QNRM);
+                        send_to_char(ch, "Displays top %d objects, in order, with the selected affect.\r\n", MAX_OBJ_LIST);
+
+                        return;
+                    }
+                    perform_obj_aff_list(ch, arg2);
+                }
+            } else if (*arg && !isdigit(*arg)) {
+                perform_obj_name_list(ch, arg);
+            } else
+                list_objects(ch, rzone, vmin, vmax);
+}
+
 
 /* Ingame Commands */
 ACMD(do_oasis_list) {
