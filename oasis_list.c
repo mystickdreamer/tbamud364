@@ -347,27 +347,18 @@ void perform_obj_name_list(struct char_data * ch, char *arg) {
 ACMD(do_zlist) {
     
     
-    bool use_name = FALSE;
+/*    bool use_name = FALSE;
     room_rnum vmin = NOWHERE;
     room_rnum vmax = NOWHERE;
     char smin[MAX_INPUT_LENGTH];
     char smax[MAX_INPUT_LENGTH];
     zone_rnum rzone = NOWHERE;
     char arg[MAX_INPUT_LENGTH];
+*/    
+
     
-    if(argument){
-        argument = smin;
-        use_name = true;
-    }
-    
-    
- //       list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
-    if (!*smin) /* No args - list all zones */
-                list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
-            else if (use_name) /* Builder name as arg */
-                list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, smin);
-            else /* Numerical args */
-                list_zones(ch, rzone, vmin, vmax, NULL);
+       list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
+
 }
 
 /* Ingame Commands */
