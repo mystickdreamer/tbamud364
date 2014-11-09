@@ -1445,7 +1445,7 @@ ACMD(do_advance) {
         return;
     }
 
-    if (GET_ADMLEVEL > ADMLVL_GOD) {
+    if (GET_ADMLEVEL < ADMLVL_GOD) {
         send_to_char(ch, "Maybe that's not such a great idea.\r\n");
         return;
     }
