@@ -356,29 +356,12 @@ ACMD(do_zlist) {
     char arg[MAX_INPUT_LENGTH];
     
     
-        if (!*smin || *smin == '.') {
-        rzone = world[IN_ROOM(ch)].zone;
-    } else if (!*smax) {
-        rzone = real_zone(atoi(smin));
-
-        if ((rzone == NOWHERE || rzone == 0) && !isdigit(*smin)) {
-            /* Must be zlist, with builder name as arg */
-            use_name = TRUE;
-        } else if (rzone == NOWHERE) {
-            send_to_char(ch, "Sorry, there's no zone with that number\r\n");
-            return;
-        }
-    } else {
-        /* Listing by min vnum / max vnum.  Retrieve the numeric values. */
-        vmin = atoi(smin);
-        vmax = atoi(smax);
-    
     
  //       list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
-if (!*smin) /* No args - list all zones */
+    if (!*arg) /* No args - list all zones */
                 list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
-            else if (use_name) /* Builder name as arg */
-                list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, smin);
+            else if (arg) /* Builder name as arg */
+                list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, arg);
             else /* Numerical args */
                 list_zones(ch, rzone, vmin, vmax, NULL);
 }
