@@ -346,16 +346,39 @@ void perform_obj_name_list(struct char_data * ch, char *arg) {
 
 ACMD(do_zlist) {
     
-//    char smin[MAX_INPUT_LENGTH];
-//    bool use_name = FALSE;
-//    room_rnum vmin = NOWHERE;
-//    room_rnum vmax = NOWHERE;
-//    zone_rnum rzone = NOWHERE;
+    char smin[MAX_INPUT_LENGTH];
+    bool use_name = FALSE;
+    room_rnum vmin = NOWHERE;
+    room_rnum vmax = NOWHERE;
+    zone_rnum rzone = NOWHERE;
+    char arg[MAX_INPUT_LENGTH];
     
-        list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
+    
+        if (!*smin || *smin == '.') {
+        rzone = world[IN_ROOM(ch)].zone;
+    } else if (!*smax) {
+        rzone = real_zone(atoi(smin));
 
- //       list_zones(ch, rzone, vmin, vmax, NULL);
-   
+        if ((rzone == NOWHERE || rzone == 0) && subcmd == SCMD_OASIS_ZLIST && !isdigit(*smin)) {
+            /* Must be zlist, with builder name as arg */
+            use_name = TRUE;
+        } else if (rzone == NOWHERE) {
+            send_to_char(ch, "Sorry, there's no zone with that number\r\n");
+            return;
+        }
+    } else {
+        /* Listing by min vnum / max vnum.  Retrieve the numeric values. */
+        vmin = atoi(smin);
+        vmax = atoi(smax);
+    
+    
+ //       list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
+if (!*smin) /* No args - list all zones */
+                list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, NULL);
+            else if (use_name) /* Builder name as arg */
+                list_zones(ch, NOWHERE, 0, zone_table[top_of_zone_table].number, smin);
+            else /* Numerical args */
+                list_zones(ch, rzone, vmin, vmax, NULL);
 }
 
 /* Ingame Commands */
