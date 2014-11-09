@@ -357,7 +357,8 @@ cpp_extern const struct command_info cmd_info[] = {
 
     { "zreset", "zreset", POS_DEAD, do_zreset, ADMLVL_BUILDER, 0},
     { "zedit", "zedit", POS_DEAD, do_oasis_zedit, ADMLVL_BUILDER, 0},
-    { "zlist", "zlist", POS_DEAD, do_oasis_list, ADMLVL_BUILDER, SCMD_OASIS_ZLIST},
+//    { "zlist", "zlist", POS_DEAD, do_oasis_list, ADMLVL_BUILDER, SCMD_OASIS_ZLIST},
+    { "zlist", "zlist", POS_DEAD, do_zlist, ADMLVL_BUILDER, 0},
     { "zlock", "zlock", POS_DEAD, do_zlock, ADMLVL_GOD, 0},
     { "zunlock", "zunlock", POS_DEAD, do_zunlock, ADMLVL_GOD, 0},
     { "zcheck", "zcheck", POS_DEAD, do_zcheck, ADMLVL_BUILDER, 0},
